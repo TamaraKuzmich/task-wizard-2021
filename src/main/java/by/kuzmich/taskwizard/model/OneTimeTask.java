@@ -5,12 +5,10 @@ public class OneTimeTask extends Task {
     private String toDoDate;
 
     public OneTimeTask(String taskName,
-                       String category,
-                       String priority,
+                       Priority priority,
+                       Category category,
                        String toDoDate) {
-        this.taskName = taskName;
-        this.category = category;
-        this.priority = priority;
+        super(taskName, category, priority);
         this.toDoDate = toDoDate;
     }
 
@@ -27,11 +25,9 @@ public class OneTimeTask extends Task {
     public String getToDoDate() {
         return toDoDate;
     }
-
+@Override
     public String toString() {
-        return "New task: " + taskName + "\r\n" +
-                "Category: " + category + "\r\n" +
-                "Priority: " + priority + "\r\n" +
+        return "One time task:" + "\r\n" + super.toString() +
                 "To do: " + toDoDate;
     }
 

@@ -3,17 +3,18 @@ package by.kuzmich.taskwizard.model;
 public class RepeatableTask extends Task {
     private String firstDateToDo;
     private String repeatPeriod;
+    private String nextDateToDo;
 
     public RepeatableTask(String taskName,
-                          String category,
-                          String priority,
+                          Priority priority,
+                          Category category,
                           String firstDateToDo,
-                          String repeatPeriod) {
-        this.taskName = taskName;
-        this.category = category;
-        this.priority = priority;
+                          String repeatPeriod,
+                          String nextDateToDo) {
+        super(taskName, category, priority);
         this.firstDateToDo = firstDateToDo;
         this.repeatPeriod = repeatPeriod;
+        this.nextDateToDo = nextDateToDo;
     }
 
     @Override
@@ -37,11 +38,20 @@ public class RepeatableTask extends Task {
         return repeatPeriod;
     }
 
+    public String getNextDateToDo() {
+        return nextDateToDo;
+    }
+
+    public void setNextDateToDo(String nextDateToDo) {
+        this.nextDateToDo = nextDateToDo;
+    }
+
+    @Override
     public String toString() {
-        return "New task: " + taskName + "\r\n" +
-                "Category: " + category + "\r\n" +
-                "Priority: " + priority + "\r\n";
+        return "Repeatable task" + "\r\n" + super.toString() +
+                "Next day to do: " + nextDateToDo;
     }
 
 
 }
+
