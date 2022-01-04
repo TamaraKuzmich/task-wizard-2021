@@ -11,7 +11,7 @@ public class RepeatableTask extends Task {
                           String firstDateToDo,
                           String repeatPeriod,
                           String nextDateToDo) {
-        super(taskName, category, priority);
+        super(taskName, priority, category);
         this.firstDateToDo = firstDateToDo;
         this.repeatPeriod = repeatPeriod;
         this.nextDateToDo = nextDateToDo;
@@ -48,7 +48,7 @@ public class RepeatableTask extends Task {
 
     @Override
     public String toString() {
-        return "Repeatable task" + "\r\n" + super.toString() +
+        return "Repeatable task: " + "\r\n" + super.toString() +
                 "Next day to do: " + nextDateToDo;
     }
 

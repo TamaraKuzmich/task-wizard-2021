@@ -3,7 +3,7 @@ package by.kuzmich.taskwizard.model;
 public class NumberID extends ID <Integer> {
 
 
-    protected NumberID(Integer identification) {
+    public NumberID(Integer identification) {
         super(identification);
     }
 
@@ -11,4 +11,5 @@ public class NumberID extends ID <Integer> {
     public Integer getIdentification() {
         return identification;
     }
+
 }

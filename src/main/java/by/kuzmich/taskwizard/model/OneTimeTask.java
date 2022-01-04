@@ -8,7 +8,7 @@ public class OneTimeTask extends Task {
                        Priority priority,
                        Category category,
                        String toDoDate) {
-        super(taskName, category, priority);
+        super(taskName, priority, category);
         this.toDoDate = toDoDate;
     }
 

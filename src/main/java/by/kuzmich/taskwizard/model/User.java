@@ -9,25 +9,27 @@ public class User<I extends ID> {
     private int age;
 
     public User() {
-
     }
 
-    public static class Builder {
+    public static class Builder<I extends ID> {
 
-
+        private I identification;
         private String firstName;
         private String email;
         private String birthDate;
         private int age;
 
         private Builder() {
-
         }
 
-        public static Builder builder() {
-            return new Builder();
+        public static <I extends ID> Builder builder() {
+            return new Builder<I>();
         }
 
+        public Builder withIdentification (I identification) {
+            this.identification = identification;
+            return this;
+        }
 
         public Builder withFirstName(String firstName) {
             this.firstName = firstName;
@@ -49,15 +51,27 @@ public class User<I extends ID> {
             return this;
         }
 
-        public User build() {
+        public User<I> build() {
 
-            User User = new User();
-            User.firstName = firstName;
-            User.email = email;
-            User.birthDate = birthDate;
-            User.age = age;
-            return User;
+            User<I> user = new User<I>();
+            user.identification = identification;
+            user.firstName = firstName;
+            user.email = email;
+            user.birthDate = birthDate;
+            user.age = age;
+            return user;
         }
+
+    }
+
+    @Override
+    public String toString() {
+        return "User: " + "\r\n" +
+                "User ID: " + identification + "\r\n" +
+                "First name: " + firstName + "\r\n" +
+                "Email: " + email + "\r\n" +
+                "Date of birth: " + birthDate + "\r\n" +
+                "Age: " + age;
 
     }
 }

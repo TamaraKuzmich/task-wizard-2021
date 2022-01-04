@@ -2,7 +2,7 @@ package by.kuzmich.taskwizard.model;
 
 public class NameID extends ID<String> {
 
-    protected NameID(String identification) {
+    public NameID (String identification) {
         super(identification);
     }
 
