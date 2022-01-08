@@ -1,6 +1,6 @@
 package by.kuzmich.taskwizard.model;
 
-public abstract class ID<I> {
+public class ID<I> {
 
     protected I identification;
 
@@ -8,10 +8,17 @@ public abstract class ID<I> {
         this.identification = identification;
     }
 
-    public abstract I getIdentification();
+    public void setIdentification(I identification) {
+        this.identification = identification;
+    }
+
+    public I getIdentification() {
+        return identification;
+    }
 
     @Override
     public String toString() {
-        return "Your UserID: " + getIdentification().toString();
+        return "Your UserID: " +
+                getIdentification().toString();
     }
 }

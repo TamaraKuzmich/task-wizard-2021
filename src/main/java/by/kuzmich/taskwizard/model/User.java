@@ -1,6 +1,6 @@
 package by.kuzmich.taskwizard.model;
 
-public class User<I extends ID> {
+public class User<I> {
 
     private I identification;
     private String firstName;
@@ -8,10 +8,7 @@ public class User<I extends ID> {
     private String birthDate;
     private int age;
 
-    public User() {
-    }
-
-    public static class Builder<I extends ID> {
+    public static class Builder<I> {
 
         private I identification;
         private String firstName;
@@ -22,11 +19,11 @@ public class User<I extends ID> {
         private Builder() {
         }
 
-        public static <I extends ID> Builder builder() {
-            return new Builder<I>();
+        public static Builder builder() {
+            return new Builder();
         }
 
-        public Builder withIdentification (I identification) {
+        public Builder withIdentification(I identification) {
             this.identification = identification;
             return this;
         }
@@ -53,7 +50,7 @@ public class User<I extends ID> {
 
         public User<I> build() {
 
-            User<I> user = new User<I>();
+            User<I> user = new User<>();
             user.identification = identification;
             user.firstName = firstName;
             user.email = email;
@@ -61,6 +58,7 @@ public class User<I extends ID> {
             user.age = age;
             return user;
         }
+
 
     }
 
