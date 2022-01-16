@@ -21,7 +21,7 @@ public enum Priority {
         return priorityName;
     }
 
-    public Priority parse (int priorityNumber) {
+    public static Priority parse (int priorityNumber) {
         for (Priority priority : values()) {
             if (priorityNumber == priority.priorityID) {
                 return priority;

@@ -23,7 +23,7 @@ public enum Category {
         return categoryName;
     }
 
-    public Category parse(int categoryNumber) {
+    public static Category parse(int categoryNumber) {
         for (Category category : values()) {
             if (categoryNumber == category.categoryID) {
                 return category;

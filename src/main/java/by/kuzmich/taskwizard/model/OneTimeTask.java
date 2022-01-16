@@ -4,6 +4,9 @@ public class OneTimeTask extends Task {
 
     private String toDoDate;
 
+    public OneTimeTask(){
+    }
+
     public OneTimeTask(String taskName,
                        Priority priority,
                        Category category,
@@ -13,7 +16,7 @@ public class OneTimeTask extends Task {
     }
 
     @Override
-    public void performed() {
+    public void markAsPerformed() {
         System.out.println("This task is done.");
 
     }
@@ -25,10 +28,12 @@ public class OneTimeTask extends Task {
     public String getToDoDate() {
         return toDoDate;
     }
-@Override
+
+    @Override
     public String toString() {
         return "One time task:" + "\r\n" + super.toString() +
                 "To do: " + toDoDate;
     }
+
 
 }

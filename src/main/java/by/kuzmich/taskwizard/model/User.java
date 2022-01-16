@@ -6,7 +6,7 @@ public class User<I> {
     private String firstName;
     private String email;
     private String birthDate;
-    private int age;
+    private int password;
 
     public static class Builder<I> {
 
@@ -14,7 +14,9 @@ public class User<I> {
         private String firstName;
         private String email;
         private String birthDate;
-        private int age;
+        private int password;
+
+
 
         private Builder() {
         }
@@ -43,8 +45,8 @@ public class User<I> {
             return this;
         }
 
-        public Builder withAge(int age) {
-            this.age = age;
+        public Builder withPassword(int password) {
+            this.password = password;
             return this;
         }
 
@@ -55,12 +57,14 @@ public class User<I> {
             user.firstName = firstName;
             user.email = email;
             user.birthDate = birthDate;
-            user.age = age;
+            user.password = password;
             return user;
         }
 
 
     }
+
+
 
     @Override
     public String toString() {
@@ -69,7 +73,9 @@ public class User<I> {
                 "First name: " + firstName + "\r\n" +
                 "Email: " + email + "\r\n" +
                 "Date of birth: " + birthDate + "\r\n" +
-                "Age: " + age;
+                "Age: " + password;
 
     }
+
+
 }

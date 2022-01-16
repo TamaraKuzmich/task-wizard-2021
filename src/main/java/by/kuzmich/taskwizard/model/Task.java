@@ -1,10 +1,13 @@
 package by.kuzmich.taskwizard.model;
 
 public abstract class Task implements Performable {
+
     protected String taskName;
     protected Priority priority;
     protected Category category;
 
+    protected Task() {
+    }
 
     protected Task(String taskName, Priority priority, Category category) {
         this.taskName = taskName;
@@ -12,10 +15,29 @@ public abstract class Task implements Performable {
         this.category = category;
     }
 
-    // trying to simplify defining of enums when creating new task objects
-    // it could probably be useful with parse method
-    // this.priority = priority.parse(0);
-    // this.category = category.parse(0);
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
 
     @Override

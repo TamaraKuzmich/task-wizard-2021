@@ -1,6 +1,8 @@
 package by.kuzmich.taskwizard.app;
 
 import by.kuzmich.taskwizard.model.*;
+import by.kuzmich.taskwizard.util.OneTimeTaskCreator;
+import by.kuzmich.taskwizard.util.RepeatableTaskCreator;
 
 import static java.lang.System.*;
 
@@ -9,7 +11,7 @@ public class App {
 
         User user = User.Builder.builder()
                 .withIdentification("tamara")
-                .withAge(37)
+                .withPassword(37)
                 .withBirthDate("01.01.1984")
                 .withEmail("anamara@tut.by")
                 .withFirstName("Tamara")
@@ -17,7 +19,7 @@ public class App {
 
         User user1= User.Builder.builder()
                 .withIdentification(4567)
-                .withAge(36)
+                .withPassword(36)
                 .withBirthDate("01.01.1985")
                 .withEmail("student1985@tut.by")
                 .withFirstName("John")
@@ -30,19 +32,17 @@ public class App {
         out.println(user1);
         out.println();
 
-        OneTimeTask oneTimeTask1 = new OneTimeTask("buy present for Dad",
-                Priority.HIGH_PRIORITY, Category.SHOPPING,
-                "2022-02-22");
+        OneTimeTask oneTimeTask = OneTimeTaskCreator.create();
+        RepeatableTask repeatableTask = RepeatableTaskCreator.create();
 
-        out.println(oneTimeTask1);
+
+
         out.println();
+        out.println(oneTimeTask);
+        out.println();
+        out.println(repeatableTask);
 
-        RepeatableTask repeatableTask1 = new RepeatableTask("swipe the floor",
-                Priority.LOW_PRIORITY,
-                Category.HOUSEHOLD, "2022-01-05", "3 days",
-                "2022-01-08");
 
-        out.println(repeatableTask1);
 
     }
 }

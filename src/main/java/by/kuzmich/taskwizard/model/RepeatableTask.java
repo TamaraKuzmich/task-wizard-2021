@@ -17,8 +17,12 @@ public class RepeatableTask extends Task {
         this.nextDateToDo = nextDateToDo;
     }
 
+    public RepeatableTask() {
+
+    }
+
     @Override
-    public void performed() {
+    public void markAsPerformed() {
         System.out.println("This task is done for today.");
     }
 
@@ -38,12 +42,11 @@ public class RepeatableTask extends Task {
         return repeatPeriod;
     }
 
-    public String getNextDateToDo() {
-        return nextDateToDo;
-    }
-
     public void setNextDateToDo(String nextDateToDo) {
         this.nextDateToDo = nextDateToDo;
+    }
+    public String getNextDateToDo() {
+        return nextDateToDo;
     }
 
     @Override
