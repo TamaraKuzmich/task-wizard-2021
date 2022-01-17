@@ -1,6 +1,8 @@
 package by.kuzmich.taskwizard.model;
 
-public abstract class Task implements Performable {
+import java.util.Objects;
+
+public abstract class Task implements Performable, Comparable<Task> {
 
     protected String taskName;
     protected Priority priority;
@@ -39,6 +41,30 @@ public abstract class Task implements Performable {
         this.category = category;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        // If the object is compared with itself then return true
+        if (o == this) {
+            return true;
+        }
+        // Check if o is not null and is an instance of Task
+        if ((o == null) || (o.getClass() != this.getClass())) {
+            return false;
+        }
+        // typecast o to Task so that we can compare chosen fields
+        Task t = (Task) o;
+        return t.taskName.equalsIgnoreCase(taskName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taskName);
+    }
+
+    @Override
+    public int compareTo(Task otherTask) {
+        return taskName.compareTo(otherTask.taskName);
+    }
 
     @Override
     public String toString() {

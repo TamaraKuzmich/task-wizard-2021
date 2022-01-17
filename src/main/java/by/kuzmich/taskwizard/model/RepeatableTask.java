@@ -1,5 +1,7 @@
 package by.kuzmich.taskwizard.model;
 
+import static java.lang.System.*;
+
 public class RepeatableTask extends Task {
     private String firstDateToDo;
     private String repeatPeriod;
@@ -23,7 +25,7 @@ public class RepeatableTask extends Task {
 
     @Override
     public void markAsPerformed() {
-        System.out.println("This task is done for today.");
+        out.println("This task is done for today.");
     }
 
     public void setFirstDateToDo(String firstDateToDo) {
@@ -45,13 +47,14 @@ public class RepeatableTask extends Task {
     public void setNextDateToDo(String nextDateToDo) {
         this.nextDateToDo = nextDateToDo;
     }
+
     public String getNextDateToDo() {
         return nextDateToDo;
     }
 
     @Override
     public String toString() {
-        return "Repeatable task: " + "\r\n" + super.toString() +
+        return super.toString() +
                 "Next day to do: " + nextDateToDo;
     }
 

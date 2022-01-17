@@ -25,7 +25,7 @@ public class RepeatableTaskCreator {
     }
 
     private String getTaskNameFromUser() {
-        out.print("Enter task name: ");
+        out.print("Enter the name of your repeatable task: ");
         return SCANNER.nextLine();
     }
 
@@ -47,14 +47,12 @@ public class RepeatableTaskCreator {
 
     private String getFirstDayToDoFromUser() {
         out.print("Enter first date to do: ");
-        String dateFromUser = SCANNER.nextLine();
-        return dateFromUser;
+        return SCANNER.nextLine();
     }
 
     private String getRepeatPeriodFromUser() {
         out.print("Enter frequency of performing: ");
-        String dateFromUser = SCANNER.nextLine();
-        return dateFromUser;
+        return SCANNER.nextLine();
     }
 
 

@@ -1,5 +1,7 @@
 package by.kuzmich.taskwizard.model;
 
+import static java.lang.System.*;
+
 public class OneTimeTask extends Task {
 
     private String toDoDate;
@@ -17,7 +19,7 @@ public class OneTimeTask extends Task {
 
     @Override
     public void markAsPerformed() {
-        System.out.println("This task is done.");
+        out.println("This task is done.");
 
     }
 
@@ -31,8 +33,8 @@ public class OneTimeTask extends Task {
 
     @Override
     public String toString() {
-        return "One time task:" + "\r\n" + super.toString() +
-                "To do: " + toDoDate;
+        return super.toString() +
+                "To do before: " + toDoDate;
     }
 
 

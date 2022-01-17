@@ -1,7 +1,5 @@
 package by.kuzmich.taskwizard.model;
 
-import java.sql.PreparedStatement;
-
 public enum Priority {
 
     HIGH_PRIORITY("HIGH PRIORITY", 0),
@@ -9,8 +7,8 @@ public enum Priority {
     LOW_PRIORITY("Low priority", 2);
 
 
-    private String priorityName;
-    private int priorityID;
+    private final String priorityName;
+    private final int priorityID;
 
     Priority(String priorityName, int priorityID) {
         this.priorityName = priorityName;

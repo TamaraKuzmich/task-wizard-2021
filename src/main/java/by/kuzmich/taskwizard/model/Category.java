@@ -11,8 +11,8 @@ public enum Category {
     PERSONAL("Personal", 6),
     OTHER("Other", 7);
 
-    private String categoryName;
-    private int categoryID;
+    private final String categoryName;
+    private final int categoryID;
 
     Category(String categoryName, int categoryID) {
         this.categoryName = categoryName;
