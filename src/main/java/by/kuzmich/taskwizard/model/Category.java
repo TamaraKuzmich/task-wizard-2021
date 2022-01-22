@@ -12,6 +12,11 @@ public enum Category {
     OTHER("Other", 7);
 
     private final String categoryName;
+
+    public int getCategoryID() {
+        return categoryID;
+    }
+
     private final int categoryID;
 
     Category(String categoryName, int categoryID) {
@@ -23,6 +28,7 @@ public enum Category {
         return categoryName;
     }
 
+
     public static Category parse(int categoryNumber) {
         for (Category category : values()) {
             if (categoryNumber == category.categoryID) {
@@ -31,8 +37,6 @@ public enum Category {
         }
         return Category.OTHER;
     }
-
-
 
 }
 

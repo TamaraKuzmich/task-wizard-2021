@@ -3,20 +3,18 @@ package by.kuzmich.taskwizard.model;
 import static java.lang.System.*;
 
 public class RepeatableTask extends Task {
-    private String firstDateToDo;
     private String repeatPeriod;
     private String nextDateToDo;
 
     public RepeatableTask(String taskName,
                           Priority priority,
                           Category category,
-                          String firstDateToDo,
-                          String repeatPeriod,
-                          String nextDateToDo) {
+                          String nextDateToDo,
+                          String repeatPeriod) {
         super(taskName, priority, category);
-        this.firstDateToDo = firstDateToDo;
-        this.repeatPeriod = repeatPeriod;
         this.nextDateToDo = nextDateToDo;
+        this.repeatPeriod = repeatPeriod;
+
     }
 
     public RepeatableTask() {
@@ -28,12 +26,12 @@ public class RepeatableTask extends Task {
         out.println("This task is done for today.");
     }
 
-    public void setFirstDateToDo(String firstDateToDo) {
-        this.firstDateToDo = firstDateToDo;
+    public void setNextDateToDo(String nextDateToDo) {
+        this.nextDateToDo = nextDateToDo;
     }
 
-    public String getFirstDateToDo() {
-        return firstDateToDo;
+    public String getNextDateToDo() {
+        return nextDateToDo;
     }
 
     public void setRepeatPeriod(String repeatPeriod) {
@@ -42,14 +40,6 @@ public class RepeatableTask extends Task {
 
     public String getRepeatPeriod() {
         return repeatPeriod;
-    }
-
-    public void setNextDateToDo(String nextDateToDo) {
-        this.nextDateToDo = nextDateToDo;
-    }
-
-    public String getNextDateToDo() {
-        return nextDateToDo;
     }
 
     @Override

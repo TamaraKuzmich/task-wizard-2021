@@ -1,8 +1,6 @@
 package by.kuzmich.taskwizard.util;
 
-import by.kuzmich.taskwizard.model.Category;
-import by.kuzmich.taskwizard.model.OneTimeTask;
-import by.kuzmich.taskwizard.model.Priority;
+import by.kuzmich.taskwizard.model.*;
 import lombok.experimental.UtilityClass;
 
 import java.util.Scanner;
@@ -10,11 +8,21 @@ import java.util.Scanner;
 import static java.lang.System.*;
 
 @UtilityClass
-public class OneTimeTaskCreator {
+public class TaskCreator {
 
     private final Scanner SCANNER = new Scanner(in);
 
-    public OneTimeTask create() {
+    public Task create() {
+        out.println("Enter 1 if you expect to perform this task once. \r\n" +
+                "Enter 2 if it is a regular task");
+        int choice = SCANNER.nextInt();
+        SCANNER.nextLine();
+        if (choice == 1)
+            return createOneTimeTask();
+        else return createRepeatableTask();
+    }
+
+    public OneTimeTask createOneTimeTask() {
         OneTimeTask oneTimeTask = new OneTimeTask();
         oneTimeTask.setTaskName(getTaskNameFromUser());
         oneTimeTask.setPriority(getPriorityFromUser());
@@ -23,8 +31,19 @@ public class OneTimeTaskCreator {
         return oneTimeTask;
     }
 
+    public RepeatableTask createRepeatableTask() {
+        RepeatableTask repeatableTask = new RepeatableTask();
+        repeatableTask.setTaskName(getTaskNameFromUser());
+        repeatableTask.setPriority(getPriorityFromUser());
+        repeatableTask.setCategory(getCategoryFromUser());
+        repeatableTask.setNextDateToDo(getNextDateToDoFromUser());
+        repeatableTask.setRepeatPeriod(getRepeatPeriodFromUser());
+        return repeatableTask;
+    }
+
+
     private String getTaskNameFromUser() {
-        out.print("Enter task name: ");
+        out.print("Enter the name of your task: ");
         return SCANNER.nextLine();
     }
 
@@ -44,8 +63,18 @@ public class OneTimeTaskCreator {
         return Category.parse(categoryFromUser);
     }
 
+    private String getNextDateToDoFromUser() {
+        out.print("Enter date to do: ");
+        return SCANNER.nextLine();
+    }
+
+    private String getRepeatPeriodFromUser() {
+        out.print("Enter frequency of performing: ");
+        return SCANNER.nextLine();
+    }
+
     private String getToDoDateFromUser() {
-        out.print("Enter to do date of task: ");
+        out.print("Enter date to do: ");
         return SCANNER.nextLine();
     }
 
