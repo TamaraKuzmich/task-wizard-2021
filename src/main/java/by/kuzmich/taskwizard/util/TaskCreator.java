@@ -12,28 +12,28 @@ public class TaskCreator {
 
     private final Scanner SCANNER = new Scanner(in);
 
-    public Task create() {
+    public Task create(String newTaskName) {
         out.println("Enter 1 if you expect to perform this task once. \r\n" +
                 "Enter 2 if it is a regular task");
         int choice = SCANNER.nextInt();
         SCANNER.nextLine();
         if (choice == 1)
-            return createOneTimeTask();
-        else return createRepeatableTask();
+            return createOneTimeTask(newTaskName);
+        else return createRepeatableTask(newTaskName);
     }
 
-    public OneTimeTask createOneTimeTask() {
+    public OneTimeTask createOneTimeTask(String newTaskName) {
         OneTimeTask oneTimeTask = new OneTimeTask();
-        oneTimeTask.setTaskName(getTaskNameFromUser());
+        oneTimeTask.setTaskName(newTaskName);
         oneTimeTask.setPriority(getPriorityFromUser());
         oneTimeTask.setCategory(getCategoryFromUser());
         oneTimeTask.setToDoDate(getToDoDateFromUser());
         return oneTimeTask;
     }
 
-    public RepeatableTask createRepeatableTask() {
+    public RepeatableTask createRepeatableTask(String newTaskName) {
         RepeatableTask repeatableTask = new RepeatableTask();
-        repeatableTask.setTaskName(getTaskNameFromUser());
+        repeatableTask.setTaskName(newTaskName);
         repeatableTask.setPriority(getPriorityFromUser());
         repeatableTask.setCategory(getCategoryFromUser());
         repeatableTask.setNextDateToDo(getNextDateToDoFromUser());
@@ -42,9 +42,8 @@ public class TaskCreator {
     }
 
 
-    private String getTaskNameFromUser() {
-        out.print("Enter the name of your task: ");
-        return SCANNER.nextLine();
+    private String getTaskNameFromUser(String newTaskName) {
+        return newTaskName;
     }
 
     private Priority getPriorityFromUser() {
