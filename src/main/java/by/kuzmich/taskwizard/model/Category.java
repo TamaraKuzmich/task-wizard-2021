@@ -1,5 +1,7 @@
 package by.kuzmich.taskwizard.model;
 
+import by.kuzmich.taskwizard.exception.IncorrectInputException;
+
 public enum Category {
 
     WORK("Work", 0),
@@ -13,10 +15,6 @@ public enum Category {
 
     private final String categoryName;
 
-    public int getCategoryID() {
-        return categoryID;
-    }
-
     private final int categoryID;
 
     Category(String categoryName, int categoryID) {
@@ -24,18 +22,18 @@ public enum Category {
         this.categoryID = categoryID;
     }
 
-    public String getCategoryName(){
+    public String getCategoryName() {
         return categoryName;
     }
 
 
-    public static Category parse(int categoryNumber) {
+    public static Category parse(int categoryNumber) throws  IncorrectInputException {
         for (Category category : values()) {
             if (categoryNumber == category.categoryID) {
                 return category;
             }
         }
-        return Category.OTHER;
+        throw new IncorrectInputException();
     }
 
 }

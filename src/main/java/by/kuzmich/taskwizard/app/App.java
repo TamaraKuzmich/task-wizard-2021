@@ -1,18 +1,20 @@
 package by.kuzmich.taskwizard.app;
 
+import by.kuzmich.taskwizard.exception.IncorrectInputException;
 import by.kuzmich.taskwizard.model.*;
 import by.kuzmich.taskwizard.util.TaskCreator;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.lang.System.*;
 
 public class App {
+
 
     public static void main(String[] args) {
 
@@ -26,17 +28,19 @@ public class App {
         // sorting and filtering are performed well
         OneTimeTask oneTimeTask1 = new OneTimeTask("buy present for Dad",
                 Priority.HIGH_PRIORITY, Category.SHOPPING,
-                "2022-02-22");
+                LocalDate.of(2022, Month.FEBRUARY, 22));
         tasks.add(oneTimeTask1);
 
         OneTimeTask oneTimeTask2 = new OneTimeTask("buy present for Dad",
                 Priority.HIGH_PRIORITY, Category.SHOPPING,
-                "2022-02-22");
+                LocalDate.of(2022, Month.FEBRUARY, 22));
         tasks.add(oneTimeTask2);
 
         RepeatableTask repeatableTask1 = new RepeatableTask("swipe the floor",
                 Priority.LOW_PRIORITY,
-                Category.HOUSEHOLD, "2022-01-05", "3 days");
+                Category.HOUSEHOLD,
+                LocalDate.of(2022, Month.FEBRUARY, 22),
+                Period.ofDays(7));
         tasks.add(repeatableTask1);
 
         // to add new task and check if task with the same name
@@ -47,7 +51,6 @@ public class App {
             out.println("Enter the name of your task: ");
             String newTaskName = SCANNER.nextLine();
 
-            // здесь должна быть проверка, но что-то она как-то не получилась
             if (tasks.stream()
                     .map(Task::getTaskName).noneMatch(Predicate.isEqual(newTaskName))) {
                 Task newTask = TaskCreator.create(newTaskName);
@@ -98,10 +101,15 @@ public class App {
             case 1: {
                 out.println("Choose category: \n\r0 means \"Work\", \n\r1 means \"Study\", \n\r2 means \"Family\", \n\r3 means \"Household\", \n\r4 means \"Shopping\", \n\r5 means \"Sports\", \n\r6 means \"Personal\", \n\r7 means \"Other\":\n\r");
                 int filterConditionNum = SCANNER.nextInt();
+                var currCat = Category.OTHER;
+                try {
+                    currCat = Category.parse(filterConditionNum);
+                } catch (IncorrectInputException e) {}
                 SCANNER.nextLine();
+                Category finalCurrCat = currCat;
                 out.println(
                         tasks.stream().
-                                filter(task -> task.getCategory() == Category.parse(filterConditionNum)).
+                                filter(task -> task.getCategory() == finalCurrCat).
                                 map(Task::toString).
                                 collect(Collectors.joining("\n______________________________________\n",
                                         "Your tasks:\n", "\n"))
@@ -171,7 +179,6 @@ public class App {
                         "Here are the names of your tasks:\n", "\n"));
         out.println(allTaskNames);
     }
-
 
 }
 

@@ -1,24 +1,43 @@
 package by.kuzmich.taskwizard.model;
 
+import by.kuzmich.taskwizard.util.TaskCreator;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
 import static java.lang.System.*;
 
 public class RepeatableTask extends Task {
-    private String repeatPeriod;
-    private String nextDateToDo;
+    private LocalDate nextDateToDo;
+    private Period repeatPeriod;
+
+    public RepeatableTask() {
+    }
 
     public RepeatableTask(String taskName,
                           Priority priority,
                           Category category,
-                          String nextDateToDo,
-                          String repeatPeriod) {
+                          LocalDate nextDateToDo,
+                          Period repeatPeriod) {
         super(taskName, priority, category);
         this.nextDateToDo = nextDateToDo;
         this.repeatPeriod = repeatPeriod;
-
     }
 
-    public RepeatableTask() {
+    public void setNextDateToDo(LocalDate nextDateToDo) {
+        this.nextDateToDo = nextDateToDo;
+    }
 
+    public LocalDate getNextDateToDo() {
+        return nextDateToDo;
+    }
+
+    public void setRepeatPeriod(Period repeatPeriod) {
+        this.repeatPeriod = repeatPeriod;
+    }
+
+    public Period getRepeatPeriod() {
+        return repeatPeriod;
     }
 
     @Override
@@ -26,26 +45,11 @@ public class RepeatableTask extends Task {
         out.println("This task is done for today.");
     }
 
-    public void setNextDateToDo(String nextDateToDo) {
-        this.nextDateToDo = nextDateToDo;
-    }
-
-    public String getNextDateToDo() {
-        return nextDateToDo;
-    }
-
-    public void setRepeatPeriod(String repeatPeriod) {
-        this.repeatPeriod = repeatPeriod;
-    }
-
-    public String getRepeatPeriod() {
-        return repeatPeriod;
-    }
-
     @Override
     public String toString() {
         return super.toString() +
-                "Next day to do: " + nextDateToDo;
+                "Next day to do: " + nextDateToDo
+                .format(DateTimeFormatter.ofPattern(TaskCreator.DATE_PATTERN));
     }
 
 

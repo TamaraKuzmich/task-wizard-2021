@@ -1,10 +1,16 @@
 package by.kuzmich.taskwizard.model;
 
+import by.kuzmich.taskwizard.app.App;
+import by.kuzmich.taskwizard.util.TaskCreator;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static java.lang.System.*;
 
 public class OneTimeTask extends Task {
 
-    private String toDoDate;
+    private LocalDate toDoDate;
 
     public OneTimeTask(){
     }
@@ -12,8 +18,12 @@ public class OneTimeTask extends Task {
     public OneTimeTask(String taskName,
                        Priority priority,
                        Category category,
-                       String toDoDate) {
+                       LocalDate toDoDate) {
         super(taskName, priority, category);
+        this.toDoDate = toDoDate;
+    }
+
+    public void setToDoDate(LocalDate toDoDate) {
         this.toDoDate = toDoDate;
     }
 
@@ -23,18 +33,12 @@ public class OneTimeTask extends Task {
 
     }
 
-    public void setToDoDate(String toDoDate) {
-        this.toDoDate = toDoDate;
-    }
-
-    public String getToDoDate() {
-        return toDoDate;
-    }
-
     @Override
     public String toString() {
         return super.toString() +
-                "To do before: " + toDoDate;
+                "To do before: " + toDoDate.format(DateTimeFormatter
+                .ofPattern(TaskCreator.DATE_PATTERN));
+
     }
 
 
