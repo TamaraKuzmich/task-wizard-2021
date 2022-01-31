@@ -43,15 +43,14 @@ public class App {
 
         out.println("Hello, this is your task wizard.\r\n" +
                 "Here is the main menu of operations.");
-        /* toDo: when the result of filtering is null, you need to inform user about it.
-         * toDo: case 5 of switching menu with deadlines
-         */
-        switchingMenu(SCANNER, tasks);
+        // toDo: when the result of filtering is null, you need to inform user about it.
+
+        switchMenu(SCANNER, tasks);
         in.close();
 
     }
 
-    private static void switchingMenu(Scanner SCANNER, List<Task> tasks) {
+    private static void switchMenu(Scanner SCANNER, List<Task> tasks) {
         out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         out.println("Please choose an operation:\r\n" +
                 "* to see a list of your task names, press 1\r\n" +
@@ -69,17 +68,22 @@ public class App {
                     break;
                 }
                 case 2: {
-                    creatingNewUniqueTask(SCANNER, tasks);
+                    createNewUniqueTask(SCANNER, tasks);
                     break;
                 }
                 case 3: {
-                    sortingTasks(SCANNER, tasks);
+                    sortTasks(SCANNER, tasks);
                     break;
                 }
                 case 4: {
-                    filteringTasks(SCANNER, tasks);
+                    filterTasks(SCANNER, tasks);
                     break;
                 }
+                case 5: {
+                    showDaysToDeadline(SCANNER, tasks);
+                    break;
+                }
+
                 case 6: {
                     out.println("Bye. See you later.");
                     break;
@@ -93,7 +97,6 @@ public class App {
         }
     }
 
-
     public static int receiveMenuChoice(Scanner SCANNER) throws NumberFormatException {
         try {
             return Integer.parseInt(SCANNER.nextLine());
@@ -105,13 +108,13 @@ public class App {
     private static void printAllTaskNames(Scanner SCANNER, List<Task> tasks) {
         String allTaskNames = tasks.stream()
                 .map(Task::getTaskName)
-                .collect(Collectors.joining("\n",
-                        "Here are the names of your tasks:\n", "\n"));
+                .collect(Collectors.joining("\n>>> ",
+                        "Here are the names of your tasks:\n>>> ", "\n"));
         out.println(allTaskNames);
-        switchingMenu(SCANNER, tasks);
+        switchMenu(SCANNER, tasks);
     }
 
-    private static void creatingNewUniqueTask(Scanner SCANNER, List<Task> tasks) {
+    private static void createNewUniqueTask(Scanner SCANNER, List<Task> tasks) {
         out.println("Enter the name of your task: ");
         String newTaskName = SCANNER.nextLine();
 
@@ -119,11 +122,11 @@ public class App {
                 .map(Task::getTaskName).noneMatch(Predicate.isEqual(newTaskName))) {
             Task newTask = TaskCreator.create(newTaskName);
             tasks.add(newTask);
-            switchingMenu(SCANNER, tasks);
+            switchMenu(SCANNER, tasks);
         } else {
             out.println("This task already exists.");
         }
-        switchingMenu(SCANNER, tasks);
+        switchMenu(SCANNER, tasks);
     }
 
     private static void printTasks(List<Task> tasks) {
@@ -135,7 +138,7 @@ public class App {
         }
     }
 
-    private static void sortingTasks(Scanner SCANNER, List<Task> tasks) {
+    private static void sortTasks(Scanner SCANNER, List<Task> tasks) {
         out.println("Choose condition: " +
                 "for \"task name\" enter 0, for \"category\" enter 1, for \"priority\" enter 2");
         int answerConditionNumber = receiveMenuChoice(SCANNER);
@@ -158,10 +161,10 @@ public class App {
             default:
                 out.println("There is no such criteria");
         }
-        switchingMenu(SCANNER, tasks);
+        switchMenu(SCANNER, tasks);
     }
 
-    private static void filteringTasks(Scanner SCANNER, List<Task> tasks) {
+    private static void filterTasks(Scanner SCANNER, List<Task> tasks) {
         out.println("Choose condition: " +
                 "for \"category\" enter 1, for \"priority\" enter 2");
         int answerFilterCondition = receiveMenuChoice(SCANNER);
@@ -215,7 +218,25 @@ public class App {
             default:
                 out.println("There is no such criteria to choose");
         }
-        switchingMenu(SCANNER, tasks);
+        switchMenu(SCANNER, tasks);
+    }
+
+    private static void showDaysToDeadline(Scanner SCANNER, List<Task> tasks) {
+        LocalDate todayDate = LocalDate.now();
+        out.println("Remained to deadline: ");
+        for (Task task : tasks) {
+            Period daysToDeadline;
+            if (task instanceof OneTimeTask) {
+                daysToDeadline = Period.between
+                        (todayDate, ((OneTimeTask) task).getToDoDate());
+            } else {
+                daysToDeadline = Period.between
+                        (todayDate, ((RepeatableTask) task).getNextDateToDo());
+            }
+            out.println(">>> " + task.getTaskName()
+                    + ": " + daysToDeadline.getDays() + " days");
+        }
+        switchMenu(SCANNER, tasks);
     }
 
 }

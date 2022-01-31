@@ -27,6 +27,10 @@ public class OneTimeTask extends Task {
         this.toDoDate = toDoDate;
     }
 
+    public LocalDate getToDoDate() {
+        return toDoDate;
+    }
+
     @Override
     public void markAsPerformed() {
         out.println("This task is done.");
