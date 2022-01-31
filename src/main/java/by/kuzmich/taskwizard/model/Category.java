@@ -26,7 +26,6 @@ public enum Category {
         return categoryName;
     }
 
-
     public static Category parse(int categoryNumber) throws  IncorrectInputException {
         for (Category category : values()) {
             if (categoryNumber == category.categoryID) {

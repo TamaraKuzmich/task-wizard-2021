@@ -24,8 +24,8 @@ public class TaskCreator {
             DateTimeFormatter.ofPattern(DATE_PATTERN);
 
     // there are 3 attempts to enter correct number.
-    // IncorrectInputException is thrown if input is a number, but there is
-    // no such number in menu
+    // IncorrectInputException is thrown if input is a number,
+    // but there is no such number in menu
     // NumberFormatException is thrown if input is not an int number.
     public Task create(String newTaskName) {
         out.println("Enter 1 if you expect to perform this task once. \r\n" +
@@ -55,7 +55,6 @@ public class TaskCreator {
         return createOneTimeTask(newTaskName);
     }
 
-
     public OneTimeTask createOneTimeTask(String newTaskName) {
         OneTimeTask oneTimeTask = new OneTimeTask();
         oneTimeTask.setTaskName(newTaskName);
@@ -75,11 +74,18 @@ public class TaskCreator {
         return repeatableTask;
     }
 
-
     private Priority getPriorityFromUser() {
         out.print("Define priority level: \n\r" +
                 "(0 means \"High priority\", 1 means \"Regular\", 2 means \"Low priority\") : ");
-        return Priority.parse(SCANNER.nextInt());
+        try {
+            return Priority.parse(receiveAnswerNumberFromUser());
+        } catch (NumberFormatException | IncorrectInputException e) {
+            e.getMessage();
+        }
+        out.println("There is no such priority level in the list. \r\n" +
+                "If you don't mind, I'll match it as \"Regular\"");
+        return Priority.REGULAR;
+
     }
 
     private Category getCategoryFromUser() {
@@ -87,10 +93,9 @@ public class TaskCreator {
                 "0 means \"Work\", \n\r1 means \"Study\", \n\r2 means \"Family\", " +
                 "\n\r3 means \"Household\", \n\r4 means \"Shopping\", \n\r5 means \"Sports\", " +
                 "\n\r6 means \"Personal\", \n\r7 means \"Other\":\n\r");
-        SCANNER.nextLine();
         try {
             return Category.parse(receiveAnswerNumberFromUser());
-        } catch (IncorrectInputException e) {
+        } catch (NumberFormatException | IncorrectInputException e) {
             e.getMessage();
         }
         out.println("There is no such category in the list. \r\n" +
@@ -117,7 +122,7 @@ public class TaskCreator {
         try {
             return Integer.parseInt(SCANNER.nextLine());
         } catch (NumberFormatException e) {
-            throw new NumberFormatException ("You didn't enter number.");
+            throw new NumberFormatException("You didn't enter number.");
         }
     }
 

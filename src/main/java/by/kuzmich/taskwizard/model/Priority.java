@@ -1,5 +1,7 @@
 package by.kuzmich.taskwizard.model;
 
+import by.kuzmich.taskwizard.exception.IncorrectInputException;
+
 public enum Priority {
 
     HIGH_PRIORITY("HIGH PRIORITY", 0),
@@ -20,12 +22,7 @@ public enum Priority {
         return priorityName;
     }
 
-    public int getPriorityID() {
-        return priorityID;
-    }
-
-
-    public static Priority parse (int priorityNumber) {
+    public static Priority parse (int priorityNumber) throws IncorrectInputException {
         for (Priority priority : values()) {
             if (priorityNumber == priority.priorityID) {
                 return priority;
