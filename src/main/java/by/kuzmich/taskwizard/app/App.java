@@ -3,10 +3,10 @@ package by.kuzmich.taskwizard.app;
 import by.kuzmich.taskwizard.exception.IncorrectInputException;
 import by.kuzmich.taskwizard.model.*;
 import by.kuzmich.taskwizard.util.TaskCreator;
+import by.kuzmich.taskwizard.util.TaskSerializationUtil;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.Period;
 import java.util.*;
 import java.util.function.Predicate;
@@ -16,36 +16,18 @@ import static java.lang.System.*;
 
 public class App {
 
+    public static final String FILENAME = "src/main/resources/tasklist.txt";
+    public static List<Task> TASKS = new ArrayList<>();
+    public static final Scanner SCANNER = new Scanner(in);
+
     public static void main(String[] args) throws IOException {
-
-        final Scanner SCANNER = new Scanner(in);
-
-        List<Task> tasks = new ArrayList<>();
-        // some tasks to add to collection and see if
-        // sorting and filtering are performed well
-        OneTimeTask oneTimeTask1 = new OneTimeTask("buy present for Dad",
-                Priority.HIGH_PRIORITY, Category.SHOPPING,
-                LocalDate.of(2022, Month.FEBRUARY, 22));
-        tasks.add(oneTimeTask1);
-
-        OneTimeTask oneTimeTask2 = new OneTimeTask("buy present for Dad",
-                Priority.HIGH_PRIORITY, Category.SHOPPING,
-                LocalDate.of(2022, Month.FEBRUARY, 22));
-        tasks.add(oneTimeTask2);
-
-        RepeatableTask repeatableTask1 = new RepeatableTask("swipe the floor",
-                Priority.LOW_PRIORITY,
-                Category.HOUSEHOLD,
-                LocalDate.of(2022, Month.FEBRUARY, 22),
-                Period.ofDays(7));
-        tasks.add(repeatableTask1);
-
 
         out.println("Hello, this is your task wizard.\r\n" +
                 "Here is the main menu of operations.");
-        // toDo: when the result of filtering is null, you need to inform user about it.
-
-        switchMenu(SCANNER, tasks);
+        TASKS = (List<Task>) TaskSerializationUtil.download(FILENAME);
+        switchMenu(SCANNER, TASKS);
+        // saving new tasks is performed when ending a session,
+        // in switchMenu method, case 6
         in.close();
 
     }
@@ -58,7 +40,7 @@ public class App {
                 "* to sort your tasks, press 3\r\n" +
                 "* to choose tasks with certain conditions, press 4\r\n" +
                 "* to see how many time left to deadlines, press 5\r\n" +
-                "* to end the session, press 6.");
+                "* to save your tasks and end the session, press 6.");
         out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         try {
             int userChoice = receiveMenuChoice(SCANNER);
@@ -86,6 +68,7 @@ public class App {
 
                 case 6: {
                     out.println("Bye. See you later.");
+                    TaskSerializationUtil.save(TASKS, FILENAME);
                     break;
                 }
                 default: {

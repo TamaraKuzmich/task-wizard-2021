@@ -1,8 +1,9 @@
 package by.kuzmich.taskwizard.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Task implements Performable, Comparable<Task> {
+public abstract class Task implements Performable, Comparable<Task>, Serializable {
 
     protected String taskName;
     protected Priority priority;

@@ -1,13 +1,15 @@
 package by.kuzmich.taskwizard.model;
 
 import by.kuzmich.taskwizard.util.TaskCreator;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 import static java.lang.System.*;
 
-public class RepeatableTask extends Task {
+public class RepeatableTask extends Task implements Serializable {
 
     private LocalDate nextDateToDo;
     private Period repeatPeriod;

@@ -3,12 +3,13 @@ package by.kuzmich.taskwizard.model;
 import by.kuzmich.taskwizard.app.App;
 import by.kuzmich.taskwizard.util.TaskCreator;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static java.lang.System.*;
 
-public class OneTimeTask extends Task {
+public class OneTimeTask extends Task implements Serializable {
 
     private LocalDate toDoDate;
 
